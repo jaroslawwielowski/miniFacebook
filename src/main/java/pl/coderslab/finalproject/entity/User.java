@@ -71,6 +71,12 @@ public class User {
     private List<Post> postList = new ArrayList<>();
 
 
+    @JoinTable(name = "users_groups", joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_group"))
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<> userGroupList;
+
+
     public List<Post> getPostList() {
         return postList;
     }

@@ -21,6 +21,14 @@ public class Post {
     @CreationTimestamp
     private LocalDateTime createDateTime;
 
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "id_group")
+    private UserGroup userGroup;
+
     public Post() {
     }
 
@@ -50,5 +58,13 @@ public class Post {
 
     public void setCreateDateTime(LocalDateTime createDateTime) {
         this.createDateTime = createDateTime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
