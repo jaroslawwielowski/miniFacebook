@@ -16,6 +16,8 @@ public class UserGroup {
     private String groupName;
 
 //    private List<Post> postList = new ArrayList<>();
+    @ManyToMany//(mappedBy = "usergroup")
+    private List<User> userList;
 
     public UserGroup() {
 
@@ -36,13 +38,14 @@ public class UserGroup {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
-//
-//    public List<Post> getPostList() {
-//        return postList;
-//    }
-//
-//
-//    public void setPostList(List<Post> postList) {
-//        this.postList = postList;
-//    }
+
+    public List<User> getUserList() {
+        return userList;
+    }
+
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
+    }
+
+
 }

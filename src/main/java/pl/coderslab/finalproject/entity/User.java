@@ -1,6 +1,7 @@
 package pl.coderslab.finalproject.entity;
 
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -8,9 +9,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
+import org.hibernate.annotations.NaturalIdCache;
 import org.mindrot.jbcrypt.BCrypt;
 
 
@@ -18,6 +19,8 @@ import static javax.persistence.CascadeType.ALL;
 
 @Entity
 @Table(name = "users")
+@NaturalIdCache
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User {
 
     @Id
@@ -55,31 +58,54 @@ public class User {
     @JoinColumn(name = "id_profile_pic")
     private Photo profilePic;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)//mappedBy = "user",
+    private List<Friend> friends = new ArrayList<>();
+
+    @JoinTable(name = "users_groups", joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_group"))
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<UserGroup> userGroupList;
 
 
-//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
-//            orphanRemoval = true)
-//    private Set<Friend> friendSet = new HashSet<>();
-//
-//
-//
-//
-//
-//    public Set<Friend> getFriendSet() {
-//        return friendSet;
-//    }
-//
-//    public void setFriendSet(Set<Friend> friendSet) {
-//        this.friendSet = friendSet;
-//    }
+    @OneToMany(cascade = CascadeType.ALL)//mappedBy = "user",
+    private List<Post> postList = new ArrayList<>();
 
 
-    public String getAdministrativeRights() {
-        return administrativeRights;
+    public List<Post> getPostList() {
+        return postList;
     }
 
-    public void setAdministrativeRights(String administrativeRights) {
-        this.administrativeRights = administrativeRights;
+    public void setPostList(List<Post> postList) {
+        this.postList = postList;
+    }
+
+    public List<UserGroup> getUserGroupList() {
+        return userGroupList;
+    }
+
+    public void setUserGroupList(List<UserGroup> userGroupList) {
+        this.userGroupList = userGroupList;
+    }
+
+    public Photo getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(Photo profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public List<Friend> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<Friend> friends) {
+        this.friends = friends;
+
+    }
+
+    public User(@NotBlank @NotEmpty String firstName) {
+        this.firstName = firstName;
     }
 
     public void setPassword(String password) {
@@ -193,5 +219,26 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(firstName, user.firstName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName);
+    }
+
+    public String getAdministrativeRights() {
+        return administrativeRights;
+    }
+
+    public void setAdministrativeRights(String administrativeRights) {
+        this.administrativeRights = administrativeRights;
     }
 }
