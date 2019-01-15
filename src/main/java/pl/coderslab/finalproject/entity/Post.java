@@ -1,11 +1,10 @@
 package pl.coderslab.finalproject.entity;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 
+@Entity
+@Table(name = "posts")
 public class Post {
 
     @Id

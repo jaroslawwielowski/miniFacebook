@@ -17,5 +17,5 @@ public class Photo {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private byte[] profilePic;
+    private byte[] Picture;
 }

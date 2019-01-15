@@ -57,21 +57,21 @@ public class User {
 
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private Set<Friend> friendSet = new HashSet<>();
-
-
-
-
-
-    public Set<Friend> getFriendSet() {
-        return friendSet;
-    }
-
-    public void setFriendSet(Set<Friend> friendSet) {
-        this.friendSet = friendSet;
-    }
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+//            orphanRemoval = true)
+//    private Set<Friend> friendSet = new HashSet<>();
+//
+//
+//
+//
+//
+//    public Set<Friend> getFriendSet() {
+//        return friendSet;
+//    }
+//
+//    public void setFriendSet(Set<Friend> friendSet) {
+//        this.friendSet = friendSet;
+//    }
 
 
     public String getAdministrativeRights() {

@@ -4,9 +4,6 @@ package pl.coderslab.finalproject.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
 @Table(name = "userDetails")
 public class UserDetail {
