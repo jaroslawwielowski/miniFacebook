@@ -4,6 +4,8 @@ package pl.coderslab.finalproject.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "userDetails")
@@ -33,10 +35,7 @@ public class UserDetail {
 
     private String city;
 
-
-
-
-
+    private String trace ;
 
 
 
@@ -46,6 +45,15 @@ public class UserDetail {
 
 
     public UserDetail() {
+    }
+
+
+    public String getTrace() {
+        return trace;
+    }
+
+    public void setTrace(String trace) {
+        this.trace = trace;
     }
 
     public String getSex() {

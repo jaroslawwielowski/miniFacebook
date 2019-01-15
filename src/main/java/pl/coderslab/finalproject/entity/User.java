@@ -8,6 +8,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -21,35 +23,27 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @CreationTimestamp
     private LocalDateTime createDateTime;
-
     @NotBlank
     @NotEmpty
     private String firstName;
-
     @NotBlank
     @NotEmpty
     private String lastName;
-
     @NotBlank
     @NotEmpty
     @Email(regexp = ".+")
     @Column(unique=true)
     private String email;
-
-
     @NotEmpty
 //    @Size(min = 2, max = 30, message = "hasło musi posiadac od 2 do 30 znaków")
     private String password;
-
     @OneToOne(fetch = FetchType.EAGER, cascade = ALL)
     @JoinColumn(name = "id_userDetails")
     private UserDetail userDetails;
 
     private String administrativeRights;
-
 
     private boolean confirmationStatus;
     private String confirmationId;
@@ -57,22 +51,28 @@ public class User {
     private String confirmationOnlineId;
     private boolean online;
 
-    private String trace ;
-
     @OneToOne
     @JoinColumn(name = "id_profile_pic")
     private Photo profilePic;
 
 
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    private Set<Friend> friendSet = new HashSet<>();
 
-    public String getTrace() {
-        return trace;
+
+
+
+
+    public Set<Friend> getFriendSet() {
+        return friendSet;
     }
 
-    public void setTrace(String trace) {
-        this.trace = trace;
+    public void setFriendSet(Set<Friend> friendSet) {
+        this.friendSet = friendSet;
     }
+
 
     public String getAdministrativeRights() {
         return administrativeRights;
