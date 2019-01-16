@@ -1,24 +1,24 @@
-package pl.coderslab.finalproject.entity;
+package pl.coderslab.finalproject.dto;
 
 
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.NaturalIdCache;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.*;
-
-import org.hibernate.annotations.NaturalIdCache;
-import org.mindrot.jbcrypt.BCrypt;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import static javax.persistence.CascadeType.ALL;
 
-@Entity
-@Table(name = "users")
+
 @NaturalIdCache
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class User {
@@ -40,7 +40,7 @@ public class User {
     @Column(unique=true)
     private String email;
     @NotEmpty
-    //    @Size(min = 2, max = 30, message = "hasło musi posiadac od 2 do 30 znaków")
+    @Size(min = 2, max = 30, message = "hasło musi posiadac od 2 do 30 znaków")
     private String password;
     @OneToOne(fetch = FetchType.EAGER, cascade = ALL)
     @JoinColumn(name = "id_userDetails")

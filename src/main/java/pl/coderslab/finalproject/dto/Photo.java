@@ -1,4 +1,4 @@
-package pl.coderslab.finalproject.entity;
+package pl.coderslab.finalproject.dto;
 
 import org.hibernate.annotations.CreationTimestamp;
 
