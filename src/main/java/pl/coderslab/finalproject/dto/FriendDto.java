@@ -1,5 +1,7 @@
 //package pl.coderslab.finalproject.dto;
 //
+//import pl.coderslab.finalproject.entity.FriendId;
+//
 //import javax.persistence.*;
 //import java.io.Serializable;
 //import java.util.Date;
@@ -14,7 +16,7 @@
 //    private FriendId id;
 //
 //
-//    private User user1;
+//    private UserDto user1;
 //
 //
 //    private User user2;

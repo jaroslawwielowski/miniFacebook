@@ -117,9 +117,6 @@ public class User {
     }
 
     public void setPassword(String password) {
-        // NOTE w przypadku gdy hasło jest pustym stringiem/nullem, funkcja hashpw zadziała i wygeneruje
-        // nie-nullowego hasha
-        // chcemy tego uniknąć:)
         this.password =
                 password == null || password.isEmpty()
                         ? password
