@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "friends")
-public class Friend implements Serializable {
+public class Friend {
 
 
 
