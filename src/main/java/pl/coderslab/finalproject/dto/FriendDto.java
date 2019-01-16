@@ -13,15 +13,13 @@
 //    @EmbeddedId
 //    private FriendId id;
 //
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @MapsId("idUserInviter")
+//
 //    private User user1;
 //
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @MapsId("idUserDusty")
+//
 //    private User user2;
 //
-//    @Column(name = "created_on")
+//
 //    private Date createdOn = new Date();
 //
 //    private boolean accepted;
@@ -29,23 +27,6 @@
 //    public Friend() {
 //    }
 //
-//    public Friend(User user1, User user2) {
-//        this.user1 = user1;
-//        this.user2 = user2;
-//        this.id = new FriendId(user1.getId(), user2.getId());
-//    }
-//
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//
-//        if (o == null || getClass() != o.getClass())
-//            return false;
-//
-//        Friend that = (Friend) o;
-//        return Objects.equals(user1, that.user1) &&
-//                Objects.equals(user2, that.user2);
-//    }
 //
 //    @Override
 //    public int hashCode() {

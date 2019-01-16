@@ -6,7 +6,6 @@
 //import java.io.Serializable;
 //import java.util.Objects;
 //
-//@Embeddable
 //public class FriendId implements Serializable {
 //
 //    @Column(name = "id_user_inviter")
