@@ -4,6 +4,8 @@ package pl.coderslab.finalproject.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 @Entity
 @Table(name = "userDetails")
 public class UserDetail {
@@ -13,13 +15,13 @@ public class UserDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
+    @NotNull
     private int dayOfBirth;
 
-    @NotEmpty
+    @NotNull
     private String monthOfBirth;
 
-    @NotEmpty
+    @NotNull
     private int yearsOfBirth;
 
     private String sex;

@@ -23,6 +23,7 @@ public class Photo {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(columnDefinition = "LONGBLOB")
     private byte[] Picture;
 
     @ManyToOne

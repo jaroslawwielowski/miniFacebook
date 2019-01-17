@@ -1,5 +1,19 @@
-#header{
+.classs{
     width: 900px;
-    border: 10px;
+    height: 100px;
+    /*border: 10px;*/
+    /*border: black;*/
+    border-color: aqua;
     align-content: center;
+
+}
+
+#profile_photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    -webkit-border-radius: 75px;
+    -moz-border-radius: 75px;
+    /*background:"WEB-INF/StartPhoto/pprofilephoto.jpeg";*/
+    background-color: black;
 }
