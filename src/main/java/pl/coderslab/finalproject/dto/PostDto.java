@@ -1,6 +1,7 @@
 package pl.coderslab.finalproject.dto;
 
 
+import pl.coderslab.finalproject.entity.Post;
 import pl.coderslab.finalproject.entity.User;
 
 import javax.validation.constraints.Max;
@@ -15,7 +16,7 @@ public class PostDto {
     public PostDto() {
     }
 
-    public PostDto(@Max(600) String description) {
+    public PostDto(String description) {
         this.description = description;
     }
 
@@ -37,6 +38,10 @@ public class PostDto {
 
 
 
-//    public User
+    public Post toDto(){
+        Post post = new Post();
+        post.setDescription(getDescription());
+        return post;
+    }
 
 }

@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
-@RequestMapping(name = "/posts")
+@RequestMapping(value = "posts")
 class PostController {
 
     private final PostRepository postRepository;
@@ -53,59 +53,33 @@ class PostController {
 
     @GetMapping(value = "/add")
     public String addPost1(Model model,HttpServletRequest request) {
-//        User user = new User();
-//        Cookie c = WebUtils.getCookie(request, "cookieUser");
-//        String message = null;
-//        try {
-//            user= userRepository.getUserByConfirmationOnlineId(c.getValue());
-//        }catch (Exception e){
-//            message = "ups,coś poszło nie tak" + e;
-//        }
-//        if (user!=null) {
-//            if (user.isOnline()) {
-//                message = " jests już zalogowany "+ user.getFirstName() + " " + user.getLastName();
-//                model.addAttribute( "message" , message);
-//                model.addAttribute("user", user);
-//                return "piece/FirstUserPlace";
-//            }
-//        }
-//        model.addAttribute("user", new User());
-        Post post = new Post();
-        model.addAttribute("post" , post);
+
+        model.addAttribute("newpost" , new Post());
         return "fragments/addPost";
     }
 
+ 
 
-//    @PostMapping(value = "/add")
-//    public String addPost2(@ModelAttribute PostDto postDto,
-//                           Model model,
-//                           HttpServletResponse response,
-//                           HttpServletRequest request) {
-//        User user = userRepository.getUserByEmail(userDto.getEmail());
-//        String message = "nieprawidłowy login lub hasło";
-//
-//        if(user!=null){
-//            if (user.isConfirmationStatus()) {
-//                if (user.passwordMatches(userDto.getPassword())){
-//                    message = "Witaj " + user.getFirstName() + " " + user.isOnline();
-//                    user.setOnline(true);
-//                    String onlineId = createConfirmationID();
-//                    user.setConfirmationOnlineId(onlineId);
-//                    Cookie cookieUser = new Cookie("cookieUser", onlineId);
-//                    cookieUser.setPath("/");
-//                    response.addCookie(cookieUser);
-//                    userRepository.save(user);
-//                    message = "usało się :)";
-//                    model.addAttribute("message", message);
-//                    model.addAttribute("user", user);
-//                    return "index";
-//                }
-//            }
-//        }
-//
-//        model.addAttribute("user", new User());
-//        model.addAttribute("message", message);
-////        return "redirect:/";
-//        Post post =
-//    }
+    @PostMapping(value = "/add")
+    public String addPost2(@ModelAttribute UserDto userDto,
+                           @ModelAttribute PostDto postDto,
+                           Model model,
+                           HttpServletResponse response,
+                           HttpServletRequest request) {
+        Cookie c = WebUtils.getCookie(request, "cookieUser");
+        User user = new User();
+        user= userRepository.getUserByConfirmationOnlineId(c.getValue());
+        if (user!=null) {
+            if (user.isOnline()) {
+                    Post post = new Post();
+                    post= postDto.toDto();
+                    post.setUser(user);
+                    postRepository.save(post);
+                    return "fragments/allPost";
+            }
+        }
+
+        return "fragments/allPost";
+
+    }
 }

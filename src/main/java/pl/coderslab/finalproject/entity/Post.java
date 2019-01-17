@@ -14,7 +14,7 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Max(600)
+//    @Max(value = 600)
     @Column(columnDefinition = "TEXT")
     private String description;
 
