@@ -18,6 +18,9 @@ public class UserGroup {
     @ManyToMany//(mappedBy = "usergroup")
     private List<User> userList;
 
+    @JoinColumn(name = "admin_user")
+    private Long adminGroup;
+
     @OneToMany
     private List<Post> postList;
 

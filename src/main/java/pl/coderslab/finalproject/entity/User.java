@@ -79,6 +79,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL)//mappedBy = "user",
     private List<Photo> photoList = new ArrayList<>();
 
+
     public List<Post> getPostList() {
         return postList;
     }
@@ -110,6 +111,46 @@ public class User {
     public void setFriends(List<Friend> friends) {
         this.friends = friends;
 
+    }
+
+    public User() {
+    }
+
+    public User(LocalDateTime createDateTime, @NotBlank @NotEmpty String firstName, @NotBlank @NotEmpty String lastName, @NotBlank @NotEmpty @Email(regexp = ".+") String email, @NotEmpty String password, UserDetail userDetails, String administrativeRights, boolean confirmationStatus, String confirmationId, String confirmationOnlineId, boolean online, Photo profilePic, List<Friend> friends, List<UserGroup> userGroupList, List<Post> postList, List<Messages> messagesList, List<Photo> photoList) {
+        this.createDateTime = createDateTime;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.userDetails = userDetails;
+        this.administrativeRights = administrativeRights;
+        this.confirmationStatus = confirmationStatus;
+        this.confirmationId = confirmationId;
+        this.confirmationOnlineId = confirmationOnlineId;
+        this.online = online;
+        this.profilePic = profilePic;
+        this.friends = friends;
+        this.userGroupList = userGroupList;
+        this.postList = postList;
+        this.messagesList = messagesList;
+        this.photoList = photoList;
+    }
+
+
+    public List<Messages> getMessagesList() {
+        return messagesList;
+    }
+
+    public void setMessagesList(List<Messages> messagesList) {
+        this.messagesList = messagesList;
+    }
+
+    public List<Photo> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(List<Photo> photoList) {
+        this.photoList = photoList;
     }
 
     public User(@NotBlank @NotEmpty String firstName) {
@@ -245,5 +286,10 @@ public class User {
 
     public void setAdministrativeRights(String administrativeRights) {
         this.administrativeRights = administrativeRights;
+    }
+
+
+    public User(UserDetail userDetails) {
+        this.userDetails = userDetails;
     }
 }
