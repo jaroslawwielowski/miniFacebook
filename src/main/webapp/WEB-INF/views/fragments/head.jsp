@@ -6,7 +6,7 @@
 <div id="header">
     <table border="5"  align="center" class="classs">
         <tr>
-            <td id="profile_photo" rowspan="3"><a  href="/">${user.profilePic.picture}</a></td>
+            <td id="profile_photo" rowspan="3"><a  href="/"><img src="${user.profilePic.picture}"/></a></td>
             <td><b><a href="/user/${user.id}">${user.firstName} ${user.lastName}</a></b></td>
             <td colspan="3" rowspan="2"><b><h1>LOGO</h1></b></td>
             <td><b><a href="/logout/${user.id}">wyloguj</a></b></td>

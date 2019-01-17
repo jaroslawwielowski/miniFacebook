@@ -72,7 +72,7 @@ class UserController {
                         " \n Dziękujemy za rejestracje :)");
         message = "na twoje konto został wysłany link aktywacyjny";
         model.addAttribute("message", message);
-        return "index";
+        return "forward:/";
     }
 
     @GetMapping("/confirm")
