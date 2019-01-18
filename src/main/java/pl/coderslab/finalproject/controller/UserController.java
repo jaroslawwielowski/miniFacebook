@@ -109,7 +109,7 @@ class UserController {
                 message = " jests już zalogowany "+ user.getFirstName() + " " + user.getLastName();
                 model.addAttribute( "message" , message);
                 model.addAttribute("user", user);
-                return "piece/FirstUserPlace";
+                return "redirect:/e";
             }
         }
         model.addAttribute("user", new User());
@@ -139,7 +139,7 @@ class UserController {
                     message = "usało się :)";
                     model.addAttribute("message", message);
                     model.addAttribute("user", user);
-                    return "piece/FirstUserPlace";
+                    return "redirect:/e";
                 }
             }
         }

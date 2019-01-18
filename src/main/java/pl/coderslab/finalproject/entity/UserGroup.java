@@ -59,4 +59,12 @@ public class UserGroup {
     public void setPostList(List<Post> postList) {
         this.postList = postList;
     }
+
+    public Long getAdminGroup() {
+        return adminGroup;
+    }
+
+    public void setAdminGroup(Long adminGroup) {
+        this.adminGroup = adminGroup;
+    }
 }

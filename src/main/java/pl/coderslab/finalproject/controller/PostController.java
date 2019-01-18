@@ -18,10 +18,7 @@ import pl.coderslab.finalproject.repository.UserRepository;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping(value = "posts")
@@ -65,7 +62,9 @@ class PostController {
         user= userRepository.getUserByConfirmationOnlineId(c.getValue());
         if (user!=null) {
             if (user.isOnline()) {
-                List<User> friendList = userRepository.getUsersByFriends(user);
+
+                List<User> friendList = new ArrayList<>();
+                friendList.add(user);
                 List<Post> postFriendsAndMyList =  postRepository.getPostsByUser(friendList);
 
 
@@ -86,34 +85,28 @@ class PostController {
         return "fragments/addPost";
     }
 
-
-
     @PostMapping(value = "/add")
-    public String addPost2(@ModelAttribute UserDto userDto,
-                           @ModelAttribute PostDto postDto,
+    public String addPost2(@ModelAttribute PostDto postDto,
                            Model model,
-                           HttpServletResponse response,
                            HttpServletRequest request) {
         Cookie c = WebUtils.getCookie(request, "cookieUser");
         User user = new User();
         user= userRepository.getUserByConfirmationOnlineId(c.getValue());
         if (user!=null) {
             if (user.isOnline()) {
-                    Post post = new Post();
-                    post= postDto.toDto();
+                    Post post = postDto.toDto();
                     post.setUser(user);
+                    model.addAttribute("newpost", new Post());
                     postRepository.save(post);
-                    return "redirect:/posts/all";
+                    return "redirect:/";//"fragments/addPost";
             }
         }
-
-        return "fragments/allPost";
-
+        return "index";
     }
 
-    @GetMapping(value = "/onlyPage")
-    public String a(Model model,HttpServletRequest request) {
-
-        return "User/OnlyPage";
-    }
+//    @GetMapping(value = "/onlyPage")
+//    public String a(Model model,HttpServletRequest request) {
+//
+//        return "User/OnlyPage";
+//    }
 }
