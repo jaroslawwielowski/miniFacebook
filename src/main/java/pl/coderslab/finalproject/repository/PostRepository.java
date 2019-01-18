@@ -12,4 +12,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     public List<Post> getAllByUserAndUser_Friends(User user, List<User> user_friends);
 
 //    public List<Post> getAllByUserAndUser_FriendsAscCreateDateTime()
+    public  List<Post> getPostsByUser(List<User> users);
 }

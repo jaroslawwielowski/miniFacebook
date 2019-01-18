@@ -13,9 +13,13 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="/posts/add"></jsp:include>
 wszystkie posty
 <c:forEach items="${posts}" var="onepost">
 <table border="5" width="600" height="200" align="center">
+    <tr height="10" >
+        <td >${onepost.user.firstName} ${onepost.user.lastName}</td>
+    </tr>
     <tr>
         <td>${onepost.description}</td>
     </tr>

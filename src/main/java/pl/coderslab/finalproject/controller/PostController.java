@@ -18,6 +18,9 @@ import pl.coderslab.finalproject.repository.UserRepository;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -40,8 +43,12 @@ class PostController {
         user= userRepository.getUserByConfirmationOnlineId(c.getValue());
         if (user!=null) {
             if (user.isOnline()) {
-                    List<Post> postFriendsList = postRepository.findAll();
-                    model.addAttribute("posts", postFriendsList);
+                    List<Post> allPostList = postRepository.findAll();
+
+                Collections.reverse(allPostList);
+
+                    model.addAttribute("posts", allPostList);
+
                     return "fragments/allPost";
             }
         }
@@ -59,7 +66,9 @@ class PostController {
         if (user!=null) {
             if (user.isOnline()) {
                 List<User> friendList = userRepository.getUsersByFriends(user);
-                List<Post> postFriendsAndMyList =  postRepository.getAllByUserAndUser_Friends(user, friendList);
+                List<Post> postFriendsAndMyList =  postRepository.getPostsByUser(friendList);
+
+
                 model.addAttribute("posts", postFriendsAndMyList);
                 return "fragments/allPost";
             }
@@ -100,5 +109,11 @@ class PostController {
 
         return "fragments/allPost";
 
+    }
+
+    @GetMapping(value = "/onlyPage")
+    public String a(Model model,HttpServletRequest request) {
+
+        return "User/OnlyPage";
     }
 }

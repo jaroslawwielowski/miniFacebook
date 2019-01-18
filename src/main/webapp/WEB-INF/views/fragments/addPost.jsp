@@ -7,7 +7,7 @@
     <td align="right">
 <form:form method="post"
            modelAttribute="newpost" action="add">
-    <form:textarea path="description" cols="100" rows="10" placeholder="Jak Ci mija dzień?"/><br>
+    <form:textarea path="description" cols="92" rows="10" placeholder="Jak Ci mija dzień?"/><br>
     <input type="submit" value="dodaj post" >
 </form:form>
     </td>
