@@ -33,22 +33,41 @@ class PostController {
     }
 
 
-//    @GetMapping(value = "/all")
-//    public String allFriendPost(Model model, HttpServletRequest request) {
-//        Cookie c = WebUtils.getCookie(request, "cookieUser");
-//        User user = new User();
-//        user= userRepository.getUserByConfirmationOnlineId(c.getValue());
-//        if (user!=null) {
-//            if (user.isOnline()) {
-//                    List<Post> postFriendsList = postRepository.findAll();
-//                    model.addAttribute("posts", postFriendsList);
-//                    return "fragments/Post ";
-//            }
-//        }
-//        String message = "nie posiadasz uprawnień, Twoje uprawnienia to : " + user.getAdministrativeRights();
-//        model.addAttribute("message", message);
-//        return "fragments/message";
-//    }
+    @GetMapping(value = "/all")
+    public String allPost(Model model, HttpServletRequest request) {
+        Cookie c = WebUtils.getCookie(request, "cookieUser");
+        User user = new User();
+        user= userRepository.getUserByConfirmationOnlineId(c.getValue());
+        if (user!=null) {
+            if (user.isOnline()) {
+                    List<Post> postFriendsList = postRepository.findAll();
+                    model.addAttribute("posts", postFriendsList);
+                    return "fragments/allPost";
+            }
+        }
+        String message = "coś poszło nie tak :( " ;
+        model.addAttribute("message", message);
+        return "fragments/message";
+    }
+
+
+    @GetMapping(value = "/allMy")
+    public String allFriendPost(Model model, HttpServletRequest request) {
+        Cookie c = WebUtils.getCookie(request, "cookieUser");
+        User user = new User();
+        user= userRepository.getUserByConfirmationOnlineId(c.getValue());
+        if (user!=null) {
+            if (user.isOnline()) {
+                List<User> friendList = userRepository.getUsersByFriends(user);
+                List<Post> postFriendsAndMyList =  postRepository.getAllByUserAndUser_Friends(user, friendList);
+                model.addAttribute("posts", postFriendsAndMyList);
+                return "fragments/allPost";
+            }
+        }
+        String message = "coś poszło nie tak :( " ;
+        model.addAttribute("message", message);
+        return "fragments/message";
+    }
 
 
     @GetMapping(value = "/add")
@@ -58,7 +77,7 @@ class PostController {
         return "fragments/addPost";
     }
 
- 
+
 
     @PostMapping(value = "/add")
     public String addPost2(@ModelAttribute UserDto userDto,
@@ -75,7 +94,7 @@ class PostController {
                     post= postDto.toDto();
                     post.setUser(user);
                     postRepository.save(post);
-                    return "fragments/allPost";
+                    return "redirect:/posts/all";
             }
         }
 

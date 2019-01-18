@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: jaroslawwielowski
@@ -12,5 +14,12 @@
 </head>
 <body>
 wszystkie posty
+<c:forEach items="${posts}" var="onepost">
+<table border="5" width="600" height="200" align="center">
+    <tr>
+        <td>${onepost.description}</td>
+    </tr>
+</table>
+</c:forEach>
 </body>
 </html>
