@@ -26,8 +26,6 @@
     </tr>
     <c:forEach items="${users}" var="user">
         <tr>
-
-
             <td>${user.firstName}</td>
             <td>${user.lastName}</td>
             <td><a href="addToFriend/${user.id}">dodaj</a><br>

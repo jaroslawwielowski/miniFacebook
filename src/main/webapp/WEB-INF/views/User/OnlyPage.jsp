@@ -15,20 +15,14 @@
 <center>
     <top>
 <jsp:include page="../fragments/head.jsp"/>
+        <jsp:include page="../fragments/ExtraMenu.jsp"/>
 <table border="5" width="900" >
-    <%--<tr valign="top">--%>
-        <%--<td width="150"  ></td>--%>
-
-        <%--<td><jsp:include page="/posts/add"/></td>--%>
-
-        <%--<td width="150">    c</td>--%>
-    <%--</tr>--%>
     <tr valign="top">
-        <td width="150"  ><jsp:include page="/group/all"/></td>
+        <td width="150"  ><jsp:include page="/group/allMy"/></td>
 
         <td><jsp:include page="/posts/all"/></td>
 
-        <td width="150">    c</td>
+        <td width="150">twoi znajomi</td>
     </tr>
 </table>
     </top>

@@ -40,12 +40,13 @@ class PostController {
         user= userRepository.getUserByConfirmationOnlineId(c.getValue());
         if (user!=null) {
             if (user.isOnline()) {
-                    List<Post> allPostList = postRepository.findAll();
-
-                Collections.reverse(allPostList);
-
+                List<Post> allPostList = new ArrayList<>();
+                try {
+                    allPostList = postRepository.findAll();
+                }catch (Exception e){
+                }
+//                    Collections.reverse(allPostList);
                     model.addAttribute("posts", allPostList);
-
                     return "fragments/allPost";
             }
         }

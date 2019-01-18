@@ -23,13 +23,13 @@ import java.util.List;
 import java.util.Locale;
 
 @Controller
-class UserController {
+class RegisterAndLoginController {
 
     private final UserRepository userRepository;
     private final EmailService emailService;
 
 
-    public UserController(UserRepository userRepository, EmailService emailService) {
+    public RegisterAndLoginController(UserRepository userRepository, EmailService emailService) {
         this.userRepository = userRepository;
         this.emailService = emailService;
     }
@@ -49,7 +49,7 @@ class UserController {
                 message = " jests już zalogowany " + user.getFirstName() + " " + user.getLastName();
                 model.addAttribute( "message" , message);
                 model.addAttribute("user", user);
-                return "piece/FirstUserPlace";
+                return "redirect:/";
             }
         }
         model.addAttribute("user", new User());
@@ -109,7 +109,7 @@ class UserController {
                 message = " jests już zalogowany "+ user.getFirstName() + " " + user.getLastName();
                 model.addAttribute( "message" , message);
                 model.addAttribute("user", user);
-                return "redirect:/e";
+                return "redirect:/";
             }
         }
         model.addAttribute("user", new User());
@@ -139,7 +139,7 @@ class UserController {
                     message = "usało się :)";
                     model.addAttribute("message", message);
                     model.addAttribute("user", user);
-                    return "redirect:/e";
+                    return "redirect:/";
                 }
             }
         }
@@ -175,6 +175,13 @@ class UserController {
                 }
             }
         }
+        if (user!=null) {
+            if (user.isOnline()) {
+                    List<User> users = userRepository.findAll();
+                    model.addAttribute("users", users);
+                    return "fragments/allUsersForUsers";
+            }
+        }
         String message = "nie posiadasz uprawnień, Twoje uprawnienia to : " + user.getAdministrativeRights();
         model.addAttribute("message", message);
         return "fragments/message";
@@ -192,7 +199,6 @@ class UserController {
         List<String> listMonth = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             listMonth.add(Month.of(i+1).getDisplayName(TextStyle.FULL_STANDALONE, Locale.forLanguageTag("pl-PL")));
-//            listMonth.add(i+1);
         }
         return listMonth;
     }
@@ -205,22 +211,6 @@ class UserController {
         return listYears;
     }
 
-    @RequestMapping("/test")
-    public String ifOlnline(HttpServletRequest request, Model model){
-        Cookie c = WebUtils.getCookie(request, "cookieUser");
-        User user = new User();
-        user= userRepository.getUserByConfirmationOnlineId(c.getValue());
-        if (user!=null) {
-            if (user.isOnline()) {
-                String message = " jests już zalogowany";
-                model.addAttribute( "message" , message);
-                model.addAttribute("user", user);
-                return "piece/FirstUserPlace";
-            }
-        }
-
-        return "redirect:/";
-    }
 
 
     private String createConfirmationID() {

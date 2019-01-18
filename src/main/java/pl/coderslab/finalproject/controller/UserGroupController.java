@@ -80,25 +80,22 @@ class UserGroupController {
         return "fragments/message";
     }
 
-//    @GetMapping(value = "/allMy")
-//    public String allFriendPost(Model model, HttpServletRequest request) {
-//        Cookie c = WebUtils.getCookie(request, "cookieUser");
-//        User user = new User();
-//        user= userRepository.getUserByConfirmationOnlineId(c.getValue());
-//        if (user!=null) {
-//            if (user.isOnline()) {
+    @GetMapping(value = "/allMy")
+    public String allMyGroup(Model model, HttpServletRequest request) {
+        Cookie c = WebUtils.getCookie(request, "cookieUser");
+        User user = new User();
+        user= userRepository.getUserByConfirmationOnlineId(c.getValue());
+        if (user!=null) {
+            if (user.isOnline()) {
+                List<UserGroup> allGroupList = userGroupRepository.getUserGroupsByUserList(user);
+                Collections.reverse(allGroupList);
+                model.addAttribute("groups", allGroupList);
+                return "fragments/allGroup";
+            }
+        }
+        String message = "coś poszło nie tak :( " ;
+        model.addAttribute("message", message);
+        return "fragments/message";
+    }
 //
-//                List<User> friendList = new ArrayList<>();
-//                friendList.add(user);
-//                List<Post> postFriendsAndMyList =  postRepository.getPostsByUser(friendList);
-//
-//
-//                model.addAttribute("posts", postFriendsAndMyList);
-//                return "fragments/allPost";
-//            }
-//        }
-//        String message = "coś poszło nie tak :( " ;
-//        model.addAttribute("message", message);
-//        return "fragments/message";
-//    }
 }
