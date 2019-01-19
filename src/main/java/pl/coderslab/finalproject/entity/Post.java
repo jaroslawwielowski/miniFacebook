@@ -67,4 +67,12 @@ public class Post {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public UserGroup getUserGroup() {
+        return userGroup;
+    }
+
+    public void setUserGroup(UserGroup userGroup) {
+        this.userGroup = userGroup;
+    }
 }

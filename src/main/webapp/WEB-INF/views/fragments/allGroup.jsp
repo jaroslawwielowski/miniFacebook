@@ -12,7 +12,7 @@ wszystkie grupy
 <c:forEach items="${groups}" var="onegroup">
     <table border="5" width="150" height="30" >
         <tr height="10" >
-            <td >${onegroup.groupName}</td>
+            <td ><a href="/group/${onegroup.id}">${onegroup.groupName}</a></td>
         </tr>
 
     </table>

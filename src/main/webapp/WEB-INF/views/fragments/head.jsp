@@ -8,7 +8,7 @@
         <tr>
             <td id="profile_photo" rowspan="3"><a  href="/"><img src="${user.profilePic.picture}"/></a></td>
             <td><b><a href="/user/${user.id}">${user.firstName} ${user.lastName}</a></b></td>
-            <td colspan="3" rowspan="2"><b><h1>LOGO</h1></b></td>
+            <td colspan="3" rowspan="2"><b><h1><a href="/">LOGO</a></h1></b></td>
             <td><b><a href="/logout/${user.id}">wyloguj</a></b></td>
         </tr>
         <tr>

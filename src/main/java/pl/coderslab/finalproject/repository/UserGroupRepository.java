@@ -9,4 +9,5 @@ import java.util.List;
 public interface UserGroupRepository extends JpaRepository<UserGroup, Long> {
 
     List<UserGroup> getUserGroupsByUserList(User user);
+
 }

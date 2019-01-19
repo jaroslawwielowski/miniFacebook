@@ -16,6 +16,7 @@
     <top>
 <jsp:include page="../fragments/head.jsp"/>
         <jsp:include page="../fragments/ExtraMenu.jsp"/>
+        ${message}
 <table border="5" width="900" >
     <tr valign="top">
         <td width="150"  ><jsp:include page="/group/allMy"/></td>

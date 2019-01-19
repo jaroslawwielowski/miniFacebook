@@ -149,7 +149,7 @@ class RegisterAndLoginController {
         return "redirect:/";
     }
 
-    @RequestMapping("/logout/{id}")
+    @GetMapping("/logout/{id}")
     public String logOutUser(@PathVariable Long id, @ModelAttribute UserDto userDto, Model model){
         User user = new User();
         user = userRepository.getUserById(id);

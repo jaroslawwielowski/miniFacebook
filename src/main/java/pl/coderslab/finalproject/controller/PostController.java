@@ -11,6 +11,7 @@ import pl.coderslab.finalproject.dto.PostDto;
 import pl.coderslab.finalproject.dto.UserDto;
 import pl.coderslab.finalproject.entity.Post;
 import pl.coderslab.finalproject.entity.User;
+import pl.coderslab.finalproject.entity.UserGroup;
 import pl.coderslab.finalproject.enums.UserPrivileges;
 import pl.coderslab.finalproject.repository.PostRepository;
 import pl.coderslab.finalproject.repository.UserRepository;
@@ -34,7 +35,7 @@ class PostController {
 
 
     @GetMapping(value = "/all")
-    public String allPost(Model model, HttpServletRequest request) {
+    public String allPost(Model model, HttpServletRequest request, @ModelAttribute UserGroup userGroup) {
         Cookie c = WebUtils.getCookie(request, "cookieUser");
         User user = new User();
         user= userRepository.getUserByConfirmationOnlineId(c.getValue());
@@ -45,9 +46,31 @@ class PostController {
                     allPostList = postRepository.findAll();
                 }catch (Exception e){
                 }
-//                    Collections.reverse(allPostList);
+                    Collections.reverse(allPostList);
                     model.addAttribute("posts", allPostList);
                     return "fragments/allPost";
+            }
+        }
+        String message = "coś poszło nie tak :( " ;
+        model.addAttribute("message", message);
+        return "fragments/message";
+    }
+
+    @GetMapping(value = "/allInGroup")
+    public String allPostInGroup(Model model, HttpServletRequest request, @ModelAttribute UserGroup userGroup) {
+        Cookie c = WebUtils.getCookie(request, "cookieUser");
+        User user = new User();
+        user= userRepository.getUserByConfirmationOnlineId(c.getValue());
+        if (user!=null) {
+            if (user.isOnline()) {
+                List<Post> allPostList = new ArrayList<>();
+                try {
+                    allPostList = postRepository.getPostsByUserGroup(userGroup);
+                }catch (Exception e){
+                }
+                Collections.reverse(allPostList);
+                model.addAttribute("posts", allPostList);
+                return "fragments/allPost";
             }
         }
         String message = "coś poszło nie tak :( " ;
@@ -80,7 +103,7 @@ class PostController {
 
 
     @GetMapping(value = "/add")
-    public String addPost1(Model model,HttpServletRequest request) {
+    public String addPost1(Model model) {
 
         model.addAttribute("newpost" , new Post());
         return "fragments/addPost";
@@ -97,8 +120,8 @@ class PostController {
             if (user.isOnline()) {
                     Post post = postDto.toDto();
                     post.setUser(user);
-                    model.addAttribute("newpost", new Post());
                     postRepository.save(post);
+                    model.addAttribute("newpost", new Post());
                     return "redirect:/";//"fragments/addPost";
             }
         }

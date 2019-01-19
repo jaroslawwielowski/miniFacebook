@@ -18,9 +18,9 @@
         <jsp:include page="../fragments/ExtraMenu.jsp"/>
         <table border="5" width="900" >
             <tr valign="top">
-                <td width="150"  ><jsp:include page="/group/all"/></td>
+                <td width="150"  ><jsp:include page="/group/allMy"/></td>
 
-                <td><jsp:include page="/group/all"/></td>
+                <td><jsp:include page="../fragments/allPost.jsp"/></td>
 
                 <td width="150">twoi znajomi</td>
             </tr>
